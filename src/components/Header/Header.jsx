@@ -1,12 +1,16 @@
 import React, { useState } from "react";
 import "./Header.css";
+import IngredientsList from "../IngredientsList/IngredientsList";
+import ClaudeRecipe from "../ClaudeRecipe/ClaudeRecipe";
 
 const Header = () => {
   const [ingredients, setIngredients] = useState([]);
+  const [recipeShown, setRecipeShown] = useState(false);
 
-  const ingredientListItems = ingredients.map((ingredient) => (
-    <li key={ingredient}>{ingredient}</li>
-  ));
+
+  const toggleRecipeShown = () => {
+    setRecipeShown(prevShown => !prevShown)
+  }
 
   const addIngredients = (formData) => {
     // const formData = new FormData(event.currentTarget)
@@ -27,19 +31,9 @@ const Header = () => {
           <button>Add ingredient</button>
         </form>
         { ingredients.length > 0 &&
-        <section>
-          <h2>Ingredients on hand:</h2>
-          <ul className="ingredients-list" aria-live="polite">{ingredientListItems}</ul>
-          {ingredients.length < 4 && <p className="condition">Minimum Four Ingredients Needed.</p> }
-          {ingredients.length > 3 && <div className="get-recipe-container">
-            <div>
-              <h3>Ready for a recipe?</h3>
-              <p>Generate a recipe from your list of ingredients.</p>
-            </div>
-            <button>Get a recipe</button>
-          </div>}
-        </section>
+          <IngredientsList ingredients={ingredients} toggleRecipeShown={toggleRecipeShown} />
         }
+        { recipeShown && <ClaudeRecipe ingredients={ingredients} />}
       </main>
     </>
   );
