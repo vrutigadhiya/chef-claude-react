@@ -1,16 +1,98 @@
-# React + Vite
+# 🍳 Chef Claude – AI Recipe Generator
 
-This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
+> **Chef Claude** is an AI-powered recipe generator built with **React**. Simply add the ingredients you have, and the application generates a delicious, well-formatted recipe using AI.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## ✨ Features
 
-## React Compiler
+* 🥕 Add ingredients dynamically
+* 🗑️ Remove ingredients individually
+* 🚫 Prevent duplicate and empty submissions
+* 👨‍🍳 Select serving size (1, 2, 4, or 6 people)
+* 🤖 Generate recipes using **Groq AI (Llama 3.1)**
+* 🥗 Automatically keeps recipes vegetarian unless non-vegetarian ingredients are provided
+* 📋 Copy generated recipes to the clipboard
+* 🖼️ Export recipes as an image
+* 📄 Download recipes as a PDF
+* 📝 Beautiful Markdown rendering
+* 📱 Fully responsive design with Tailwind CSS
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+---
 
-## Expanding the Oxlint configuration
+## 🛠️ Tech Stack
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and Oxlint's TypeScript related rules in your project.
+| Frontend             | Libraries       |
+| -------------------- | --------------- |
+| ⚛️ React (Vite)      | React Markdown  |
+| 💻 JavaScript (ES6+) | Tailwind CSS v4 |
+|                      | html2canvas     |
+|                      | react-to-print  |
+|                      | lucide-react    |
+
+---
+
+## 📖 What I Learned
+
+* ✅ Integrating AI APIs into a React application
+* ✅ Prompt engineering for better AI responses
+* ✅ Rendering Markdown safely in React
+* ✅ Managing asynchronous state, loading, and error handling
+* ✅ Building responsive UI with Tailwind CSS
+* ✅ Dynamic form handling and ingredient management
+* ✅ Preventing duplicate and empty inputs
+* ✅ Using the Clipboard API
+* ✅ Exporting content as images and PDFs
+* ✅ Creating reusable React components
+
+---
+
+## 🚀 Getting Started
+
+### Prerequisites
+
+* Node.js v18 or later
+
+### Clone the repository
+
+```bash
+git clone https://github.com/vrutigadhiya/chef-claude.git
+cd chef-claude
+```
+
+### Install dependencies
+
+```bash
+npm install
+```
+
+### Start the development server
+
+```bash
+npm run dev
+```
+
+Visit the application at:
+
+```text
+http://localhost:5173
+```
+
+---
+
+## 📂 Project Structure
+
+```text
+chef-claude/
+│
+├── public/
+├── src/
+│   ├── assets/
+│   ├── components/
+│   ├── App.jsx
+│   ├── main.jsx
+│   └── index.css
+│
+├── package.json
+└── README.md
+```
