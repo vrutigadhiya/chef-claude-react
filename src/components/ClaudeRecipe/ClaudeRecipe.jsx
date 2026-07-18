@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from "react";
 import "./ClaudeRecipe.css";
+import ReactMarkdown from "react-markdown";
+import remarkGfm from "remark-gfm";
 
-const ClaudeRecipe = ({ ingredients }) => {
+const ClaudeRecipe = ({ ingredients, serves }) => {
   const [recipe, setRecipe] = useState("");
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
@@ -14,7 +16,7 @@ const ClaudeRecipe = ({ ingredients }) => {
         const res = await fetch("/api/groq-recipe", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ ingredients }),
+          body: JSON.stringify({ ingredients, serves }),
         });
 
         const data = await res.json().catch(() => null);
@@ -24,15 +26,16 @@ const ClaudeRecipe = ({ ingredients }) => {
 
         if (!res.ok) {
           throw new Error(
-            `Request failed: ${res.status} - ${JSON.stringify(data)}`
+            `Request failed: ${res.status} - ${JSON.stringify(data)}`,
           );
         }
 
         setRecipe(data.recipe);
       } catch (err) {
         console.error("Fetch error details:", err);
-        setError("Something went wrong generating your recipe. Please try again.");
-        
+        setError(
+          "Something went wrong generating your recipe. Please try again.",
+        );
       } finally {
         setLoading(false);
       }
@@ -45,13 +48,17 @@ const ClaudeRecipe = ({ ingredients }) => {
 
   return (
     <section className="claude-recipe">
-      {loading && <p>Generating your recipe...</p>}
-      {error && <p className="error">{error}</p>}
+      {loading && (
+        <div className="loading-spinner">
+          <p>✨ Generating your recipe...</p>
+        </div>
+      )}
+      {error && <p className="error-message">❌ {error}</p>}
       {!loading && !error && recipe && (
-        <div className="recipe-content">
-          {recipe.split("\n").map((line, i) => (
-            <p key={i}>{line}</p>
-          ))}
+        <div className="recipe-card">
+          <div className="recipe-content">
+            <ReactMarkdown remarkPlugins={[remarkGfm]}>{recipe}</ReactMarkdown>
+          </div>
         </div>
       )}
     </section>
