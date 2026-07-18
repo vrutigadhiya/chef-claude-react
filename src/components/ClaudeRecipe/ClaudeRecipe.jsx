@@ -17,14 +17,22 @@ const ClaudeRecipe = ({ ingredients }) => {
           body: JSON.stringify({ ingredients }),
         });
 
+        const data = await res.json().catch(() => null);
+
+        console.log("Status:", res.status);
+        console.log("Response body:", data);
+
         if (!res.ok) {
-          throw new Error("Failed to fetch recipe");
+          throw new Error(
+            `Request failed: ${res.status} - ${JSON.stringify(data)}`
+          );
         }
 
-        const data = await res.json();
         setRecipe(data.recipe);
       } catch (err) {
+        console.error("Fetch error details:", err);
         setError("Something went wrong generating your recipe. Please try again.");
+        
       } finally {
         setLoading(false);
       }
